@@ -108,28 +108,6 @@
   .tag.red{ background:var(--coral); color:#fff; transform:rotate(-3deg); }
   .tag.gold{ background:var(--dawn-gold); color:var(--ink); transform:rotate(3deg); }
 
-  .hero-photo{
-    width:230px; height:290px; margin-bottom:2.2rem; border-radius:6px; overflow:hidden;
-    position:relative; transform:rotate(-2deg);
-    box-shadow: 0 24px 50px -14px rgba(0,0,0,0.6), 0 0 0 6px rgba(247,242,231,0.9), 0 0 0 7px rgba(20,33,61,0.4);
-  }
-  .hero-photo img{
-    width:100%; height:100%; object-fit:cover; object-position:78% 30%;
-    filter: grayscale(0.25) sepia(0.18) contrast(1.08) brightness(0.92);
-  }
-  .hero-photo::after{
-    content:''; position:absolute; inset:0;
-    background: linear-gradient(200deg, rgba(232,101,74,0.28), rgba(20,33,61,0.35) 55%, rgba(235,193,62,0.2));
-    mix-blend-mode: multiply;
-  }
-  .photo-fallback{
-    width:100%; height:100%; display:none; align-items:center; justify-content:center;
-    background: linear-gradient(160deg, var(--night-2), var(--night));
-  }
-  .photo-fallback svg{ width:70%; height:70%; }
-  @keyframes fallbackGlow{ 0%,100%{ opacity:0.4; } 50%{ opacity:0.9; } }
-  .fallback-rays{ animation: fallbackGlow 2.6s ease-in-out infinite; transform-origin:150px 55px; }
-
   .headline{
     font-size: clamp(2.1rem, 5.6vw, 3.6rem);
     font-weight:600; line-height:1.12; letter-spacing:-0.01em;
@@ -147,8 +125,8 @@
   .cta-stack{ display:flex; flex-direction:column; align-items:center; gap:0.9rem; }
   .cta{
     display:inline-block; background:var(--dawn-gold); color:var(--ink);
-    font-weight:700; font-size:1.15rem; letter-spacing:0.01em;
-    padding:1.25rem 3.2rem; border-radius:3px; text-decoration:none;
+    font-weight:700; font-size:1.05rem; letter-spacing:0.01em; text-align:center;
+    padding:1.2rem 2.2rem; border-radius:3px; text-decoration:none; max-width:22ch;
     box-shadow: 0 0 0 1px rgba(235,193,62,0.4), 0 14px 32px -10px rgba(235,193,62,0.55);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -160,10 +138,22 @@
   .cta-text-link:hover{ color:var(--dawn-gold); }
 
   .countdown{
-    margin-top:2.2rem; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--paper-dim); display:flex; gap:0.4rem; align-items:baseline;
+    margin-top:2.2rem; display:flex; gap:1rem; align-items:center; justify-content:center;
   }
-  .countdown strong{ font-family:'Fraunces', serif; font-size:1.3rem; color:var(--dawn-gold); font-weight:700; letter-spacing:0; text-transform:none; }
+  .countdown-digits{ display:flex; gap:0.4rem; }
+  .countdown-box{
+    width:52px; height:60px; border-radius:6px;
+    background: rgba(10,16,28,0.7); border:1px solid rgba(247,242,231,0.18);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5);
+  }
+  .countdown-box span{
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.7rem; color:var(--dawn-gold);
+  }
+  .countdown-label{
+    font-size:0.8rem; letter-spacing:0.05em; color:var(--paper-dim);
+    max-width:6.5em; line-height:1.3; text-align:left;
+  }
 
   /* ---------- VERSE (dramatic full-screen scroll moment) ---------- */
   .verse-section{
@@ -232,15 +222,6 @@
   .group-card .g-name{ font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; margin-bottom:0.5rem; color:var(--paper); }
   .group-card .g-desc{ font-size:0.88rem; color:var(--paper-dim); line-height:1.55; }
 
-  /* ---------- FOTO FINAL (prova real) ---------- */
-  .final-photo{
-    width:190px; height:250px; margin:0 auto 2rem; border-radius:6px; overflow:hidden;
-    transform:rotate(2deg);
-    box-shadow: 0 24px 50px -14px rgba(0,0,0,0.6), 0 0 0 6px rgba(247,242,231,0.9), 0 0 0 7px rgba(20,33,61,0.4);
-  }
-  .final-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 40%; }
-  .final-caption{ font-size:0.82rem; color:var(--paper-dim); margin-bottom:2.4rem; font-style:italic; }
-
   /* ---------- FINAL CTA ---------- */
   .final-section{ text-align:center; padding-top:6rem; padding-bottom:5rem; }
   .final-section h2.serif{ font-size:clamp(2rem, 5vw, 3rem); max-width:16ch; margin:0 auto 1.4rem; }
@@ -274,35 +255,22 @@
     <span class="tag gold">AGO</span>
   </div>
 
-  <div class="hero-photo">
-    <img src="foto-hero.jpg" alt="Jovem despertando e olhando pro celular"
-         onerror="this.remove(); document.getElementById('photo-fallback').style.display='flex';">
-    <div id="photo-fallback" class="photo-fallback">
-      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g class="fallback-rays">
-          <line x1="150" y1="30" x2="140" y2="42" stroke="#EBC13E" stroke-width="3" stroke-linecap="round"/>
-          <line x1="170" y1="50" x2="156" y2="56" stroke="#EBC13E" stroke-width="3" stroke-linecap="round"/>
-          <line x1="176" y1="76" x2="160" y2="76" stroke="#EBC13E" stroke-width="3" stroke-linecap="round"/>
-        </g>
-        <rect x="118" y="34" width="58" height="94" rx="8" stroke="#F7F2E7" stroke-width="3" fill="#16213A"/>
-        <rect x="126" y="44" width="42" height="66" rx="2" fill="#0E1626"/>
-        <circle cx="147" cy="119" r="3" fill="#F7F2E7"/>
-        <path d="M30 240C30 190 60 160 100 160C140 160 170 190 170 240" stroke="#F7F2E7" stroke-width="3" fill="#16213A"/>
-        <circle cx="100" cy="120" r="42" fill="#16213A" stroke="#F7F2E7" stroke-width="3"/>
-      </svg>
-    </div>
-  </div>
-
   <h1 class="headline serif">Existem despertares que <em>um despertador</em> não consegue fazer.</h1>
 
   <p class="sub">Um final de semana pra sair do automático da rotina e viver um encontro de verdade com Jesus.</p>
 
   <div class="cta-stack">
-    <a class="cta cta-form" href="https://forms.gle/XpQYJC3zjzpaXAcA9" target="_blank" rel="noopener">Inscreva-se agora</a>
+    <a class="cta cta-form" href="https://forms.gle/XpQYJC3zjzpaXAcA9" target="_blank" rel="noopener">Inscreva-se agora e Desperte para a vida!</a>
     <a class="cta-text-link" href="#sobre">Saiba mais</a>
   </div>
 
-  <div class="countdown" id="countdown"></div>
+  <div class="countdown" id="countdown">
+    <div class="countdown-digits">
+      <div class="countdown-box"><span id="cd-tens">0</span></div>
+      <div class="countdown-box"><span id="cd-units">0</span></div>
+    </div>
+    <div class="countdown-label">Dias para Despertar</div>
+  </div>
 </section>
 
 <!-- VERSE -->
@@ -340,8 +308,8 @@
         <div class="value">15 e 16 de agosto</div>
       </div>
       <div class="info-card">
-        <div class="label">Local</div>
-        <div class="value">[Endereço / espaço do retiro]</div>
+        <div class="label">O que está incluso</div>
+        <div class="value small">Camiseta, alimentação, hospedagem e muita diversão.</div>
       </div>
       <div class="info-card">
         <div class="label">Valor</div>
@@ -393,14 +361,10 @@
 <section id="inscricao" class="final-section reveal">
   <div class="sun-glow"></div>
   <div class="panel">
-    <div class="final-photo">
-      <img src="foto-iphone.jpg" alt="Alarme do celular com o nome Desperta!">
-    </div>
-    <p class="final-caption">Isso já é real pra gente. Nosso próprio alarme já chama assim.</p>
     <h2 class="serif">Vagas limitadas. Não aperte soneca de novo.</h2>
-    <p class="sub">Garanta sua vaga ou a de alguém que você ama.</p>
+    <p class="sub">Garanta sua vaga.</p>
     <div class="cta-stack">
-      <a class="cta cta-form" href="https://forms.gle/XpQYJC3zjzpaXAcA9" target="_blank" rel="noopener">Inscreva-se agora</a>
+      <a class="cta cta-form" href="https://forms.gle/XpQYJC3zjzpaXAcA9" target="_blank" rel="noopener">Inscreva-se agora e Desperte para a vida!</a>
     </div>
   </div>
 </section>
@@ -440,30 +404,30 @@
     });
   })();
 
-  // ---------- Contador regressivo até 15/08 ----------
+  // ---------- Contador regressivo até 15/08 (estilo calendário) ----------
   (function () {
-    var el = document.getElementById('countdown');
+    var tensEl = document.getElementById('cd-tens');
+    var unitsEl = document.getElementById('cd-units');
+    var labelEl = document.querySelector('.countdown-label');
     var target = new Date('2026-08-15T09:00:00-03:00').getTime();
     function tick() {
       var diff = target - Date.now();
-      if (diff <= 0) { el.innerHTML = '<strong>É hoje!</strong> o Desperta! começou'; return; }
-      var days = Math.floor(diff / 86400000);
-      var hours = Math.floor((diff % 86400000) / 3600000);
-      el.innerHTML = 'Faltam &nbsp;<strong>' + days + '</strong>&nbsp; dias e &nbsp;<strong>' + hours + '</strong>&nbsp; horas';
+      var days = Math.max(0, Math.ceil(diff / 86400000));
+      if (diff <= 0) { days = 0; labelEl.textContent = 'É hoje! Desperta!'; }
+      var padded = String(days).padStart(2, '0').slice(-2);
+      tensEl.textContent = padded[0];
+      unitsEl.textContent = padded[1];
     }
     tick();
-    setInterval(tick, 60000);
+    setInterval(tick, 3600000);
   })();
 
-  // ---------- Scroll reveal (estilo Apple) ----------
+  // ---------- Scroll reveal (estilo Apple, repete sempre ao entrar/sair da tela) ----------
   (function () {
     var items = document.querySelectorAll('.reveal, .reveal-verse');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
-        }
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
       });
     }, { threshold: 0.15 });
     items.forEach(function (item) { io.observe(item); });
